@@ -26,7 +26,7 @@ x  & f(x) \\ \hline
 Znajdź jej aproksymacje metodą średniokwadratową dla postaci:\\
 \subsubsection{$f(x)=ax+bx^2$}
 $f(a,b) = ((y(-1)-0)^2 + (y(0)- -1)^2 + (y(1)-0)^2 + (y(2)-1)^2)*\frac{1}{4}$\\
-$f(a,b) = ((-a+b)^2 + (1)^2 + (a+b)^2 + (2a+4b-1)^2)*/frac{1}{4}$\\
+$f(a,b) = ((-a+b)^2 + (1)^2 + (a+b)^2 + (2a+4b-1)^2)*\frac{1}{4}$\\
 $f(a,b) = (a^2+b^2\cancel{-2ab} + 1 + a^2+b^2\cancel{+2ab} + 4a^2+16ab-4a+16b^2-8b+1)*\frac{1}{4}$\\
 $f(a,b) = (\frac{3}{2}a^2+4ab-a+\frac{9}{2}b^2-2b+\frac{1}{2})$\\
 $\frac{d}{da}f(a,b)=3a+4b-1$\\
@@ -83,6 +83,43 @@ $\frac{d}{db}f(a,b)=4a+8b$\\
     b=-\frac{1}{5}
 \end{cases}\end{equation*}
 
+\subsection{Aproksymacja średniokwadratowa dla funkcji w przedziale}
+Dla funkcji $f(x)=x^4, x\in<0; 1>$ Znajdź aproksymacją średniokwadratowa funkcji $f(x)=ax^2$. Znajdź, dla jakiej wartości x błąd aproksymacji będzie największy.\\
+$f(a) = (\int_{0}^{1}(ax^2-x^4)dx)^2$\\
+$f(a) = \frac{a^2}{9}-\frac{2a}{15}+\frac{1}{25}$\\
+$\frac{d}{da}f(a) = \frac{2a}{9}-\frac{2}{15}$
+
+\begin{equation*}\begin{cases}
+    \frac{a}{3}-\frac{1}{5} = 0
+\end{cases}\end{equation*}
+
+\begin{equation*}\begin{cases}
+    a = 0.6
+\end{cases}\end{equation*}
+
+Musimy znaleźć $max|(0.6x^2-x^4)|\in\{0; 1\}$, ale że nie chce mi się bawić w pochodną dla wartości bezwzględnej, znajdę minima i maksima funkcji i wezmę wartość bezwzględną z nich.
+$f(x) = 0.6x^2$
+$g(x) = 0.6x^2-x^4$
+$\frac{d}{dx}g(x) = 1.2x-4x^3$
+
+\begin{equation*}\begin{cases}
+    1.2x-4x^3 = 0
+\end{cases}\end{equation*}
+
+\begin{equation*}\begin{cases}
+    x \in \{-\sqrt{0.3}, 0, \sqrt{0.3}\}
+\end{cases}\end{equation*}
+
+$-\sqrt{0.3}<0$, więc jest poza przedziałem. Należy równierz dodać 0 i 1, jako początek i koniec przedziału.
+
+\begin{equation*}\begin{cases}
+    |f(0)| = 0\\
+    |f(\sqrt{0.3})|=0.09\\
+    |f(1)| = 0.4
+\end{cases}\end{equation*}
+
+Dla x=1 aproksymacja jest obarczona największym błędem.
+
 \section{Lagrange}
 \subsection{Wyznacz współczynniki wielomianu}
 Dla następujących danych:
@@ -96,14 +133,14 @@ x  & f(x) \\ \hline
 6  & -3   \\ \hline
 \end{tabular}
 \end{table}
-wyznacz współczynniki wielomianu Langrange'a\\
+Wyznacz współczynniki wielomianu Langrange'a\\
 $l0(x)=\frac{x- (-2)}{-4- (-2)}*\frac{x-3}{-4-3}*\frac{x-6}{-4-6} = -\frac{1}{140}x^3+\frac{1}{20}x^2-\frac{9}{35}$\\ %-4
 $l1(x)=\frac{x- (-4)}{-2- (-4)}*\frac{x-3}{-2-3}*\frac{x-6}{-2-6} = \frac{1}{80}x^3-\frac{1}{16}x^2-\frac{9}{40}x+\frac{9}{10}$\\ %(-2)
 $l2(x)=\frac{x- (-4)}{3- (-4)}*\frac{x- (-2)}{3- (-2)}*\frac{x-6}{3-6} = -\frac{1}{105}x^3+\frac{4}{15}x+\frac{16}{35}$\\ %3
 $l3(x)=\frac{x- (-4)}{6- (-4)}*\frac{x- (-2)}{6- (-2)}*\frac{x-3}{6-3} = \frac{1}{240}x^3+\frac{1}{80}x^2-\frac{1}{24}x-\frac{1}{10}$\\ %6
 $L(x)=2*l0(x)+-3*l1(x)+2*l2(x)+-3*l3(x)$\\
-$L(x)=-\frac{1}{12}x^3+\frac{1}{4}x^2+\frac{4}{3}x-2$
-Uwaga: Można sprawdzić, czy wielomian jest poprawnie obliczony wstawiając do niego wartości z tabelki. Powinny wychodzić identyczne.
+$L(x)=-\frac{1}{12}x^3+\frac{1}{4}x^2+\frac{4}{3}x-2$\\
+Uwaga: Można sprawdzić, czy wielomian jest poprawnie obliczony wstawiając do niego wartości z tabelki. Powinny wychodzić identyczne wartości f(x).
 \subsection{Wyznacz pochodną w punkcie}
 Dla danych:
 \begin{table}[H]
