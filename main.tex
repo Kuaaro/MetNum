@@ -7,6 +7,7 @@
 \usepackage[polish]{babel}
 \usepackage{cancel}
 \usepackage{amsmath}
+\usepackage[legalpaper, margin=2cm]{geometry}
 
 \begin{document}
 \section{Aproksymacja}
@@ -21,7 +22,6 @@ x  & f(x) \\ \hline
 1  & 0    \\ \hline
 2  & 1    \\ \hline
 \end{tabular}%
-
 \end{table}
 Znajdź jej aproksymacje metodą średniokwadratową dla postaci:\\
 \subsubsection{$f(x)=ax+bx^2$}
@@ -162,5 +162,25 @@ $L(x)=-1*l0(x)+\cancel{0*l1(x)}+-1*l2(x)+1*l3(x)$\\
 $L(x)=\frac{13x^3}{60}-\frac{9x^2}{10}+\frac{17x}{60}+\frac{2}{5}$\\
 $L'(x)=\frac{13x^2}{20}-\frac{9x}{5}+\frac{17}{60}$\\
 $L'(1)=\frac{13}{20}-\frac{9}{5}+\frac{17}{60}=-\frac{13}{15}$
+
+\section{Newton}
+Dla danej funkcji:
+\begin{table}[H]
+\begin{tabular}{|c|c|}
+\hline
+x  & f(x) \\ \hline
+-1 & 0    \\ \hline
+0  & -1   \\ \hline
+1  & 0    \\ \hline
+2  & 1    \\ \hline
+\end{tabular}%
+\end{table}
+$n0=0$\\
+$n1=(\cancel{\frac{0}{-1-0}} + \frac{-1}{0- (-1)})(x-(-1))$\\
+$n2=(\cancel{\frac{0}{(-1-0)(-1-1)}}+\frac{-1}{(0-(-1))(0-1)}+\cancel{\frac{0}{(1-(-1))(1-0)}})(x-(-1))(x-0)$\\
+$n3=(\cancel{\frac{0}{(-1-0)(-1-1)(-1-2)}}+\frac{-1}{(0-(-1))(0-1)(0-2)}+\cancel{\frac{0}{(1-(-1))(1-0)(1-2)}}+\frac{1}{(2-(-1))(2-0)(2-1)})(x-(-1))(x-0)(x-1)$\\
+$P(x)=n0+n1+n2+n3$\\
+$P(x)=\frac{1}{3}(-x^3+3x^2+x-3)$\\
+Ogólnie Newton to suma wielomianów k-tego stopnia, gdzie suma $\frac{f(x_k)}{x_k-x_n}$ pomnożona przez $(x-x_n)$, gdzie $n \in \{1,2...,k\}$.
 
 \end{document}
