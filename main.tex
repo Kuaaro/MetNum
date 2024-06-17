@@ -239,7 +239,7 @@ $x_4=N(x_3)=0.567143290409$\\
 Punkt zerowy znajduje się mniej więcej w x=0.56714
 
 \subsection{Jacobiego (liniowe)}
-Wzór: $x_{i+1}=(1-D^{-1}x_i)+D^{-1}b$\\
+Wzór: $x_{i+1}=(1-D^{-1}A)x_i+D^{-1}b$\\
 Uwaga: Ta metoda działa tylko jeśli w każdym wierszu i kolumnie suma modułów elementów niediagonalnych jest mniejsza niż moduł elementu diagonalnego.
 \subsubsection{\begin{equation*}\begin{cases}
     4x_1-2x_2=1\\
@@ -289,5 +289,17 @@ Skoro iteracje się nie zmieniają, mamy rozwiązanie:
 \end{cases}\end{equation*}
 
 \subsection{Dekompozycja LU (liniowe)}
+Ogólny wzór: $Ax=b\:=>\:LRx=b$, gdzie $LR=A$, L i R to macierze odpowiednio dolno i górno trujkątne.\\
+Rozwiązać:
+
+\begin{equation*}\begin{cases}
+    x_1-x_2-x_3=1\\
+    -x_1+x_2-x_3=2\\
+    -x_1+x_2+x_3=-1
+\end{cases}\end{equation*}
+
+\subsubsection{Metoda Crouta-Doolittle}
+Będę rozwiązywać wg. książki, bo mi się nie chce rozumieć, co się dzieje.
+$ $
 
 \end{document}
