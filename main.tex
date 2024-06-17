@@ -9,6 +9,8 @@
 \usepackage{amsmath}
 \usepackage[legalpaper, margin=2cm]{geometry}
 
+\setlength{\parindent}{0pt}
+
 \begin{document}
 \section{Aproksymacja}
 \subsection{Aproksymacja średniokwadratowa dla funkcji zadanej dyskretnie.}
@@ -120,6 +122,20 @@ $-\sqrt{0.3}<0$, więc jest poza przedziałem. Należy równierz dodać 0 i 1, j
 
 Dla x=1 aproksymacja jest obarczona największym błędem.
 
+\subsection{Jednostajna}
+\textbf{UWAGA: Idiota programista nie zrobił, nie używać}
+W aproksymacji jednostajnej należy stworzyć jak najmniejszy maksymalny błąd.\\
+\subsubsection{Metoda szeregów potęgowych}
+Nie rozumiem do końca, co chciał, bo szereg potęgowy to dosłownie wielomian.\\
+$\sqrt{x}=ax^2+bx+c$\\
+$f(x)=\sqrt{x}-(ax^2+bx+c), x\in<0;1>$\\
+$\frac{d}{dx}=\frac{1}{2\sqrt{x}}-2ax-b$
+
+\begin{equation*}\begin{cases}
+    \frac{1}{2\sqrt{x}}-2ax-b=0
+\end{cases}\end{equation*}
+
+
 \section{Lagrange}
 \subsection{Wyznacz współczynniki wielomianu}
 Dla następujących danych:
@@ -154,6 +170,7 @@ x  & f(x) \\ \hline
 \end{tabular}
 \end{table}
 Wyznacz pochodną dla x=1 i porównaj wynik w tym punkcie na podstawie ilorazu różnicowego centralnego.\\
+\subsubsection{Używając wielomianu}
 $l0(X)=\frac{x-1}{-1-1}*\frac{x-3}{-1-3}*\frac{x-4}{-1-4} = \frac{1}{40}(-x^3+8x^2-19x+12)$\\
 $l1(X)=\frac{x- (-1)}{1- (-1)}*\frac{x-3}{1-3}*\frac{x-4}{1-4} = \frac{1}{12}(x^3-6x^2+5x+12)$\\
 $l2(X)=\frac{x- (-1)}{3- (-1)}*\frac{x-1}{3-1}*\frac{x-4}{3-4} = \frac{1}{8}(-x^3+4x^2+x-4)$\\
@@ -162,6 +179,11 @@ $L(x)=-1*l0(x)+\cancel{0*l1(x)}+-1*l2(x)+1*l3(x)$\\
 $L(x)=\frac{13x^3}{60}-\frac{9x^2}{10}+\frac{17x}{60}+\frac{2}{5}$\\
 $L'(x)=\frac{13x^2}{20}-\frac{9x}{5}+\frac{17}{60}$\\
 $L'(1)=\frac{13}{20}-\frac{9}{5}+\frac{17}{60}=-\frac{13}{15}$
+\subsubsection{Używając ilorazu różnicowego centralnego}
+Uwaga: Sekcja zrobiona przy pomocy AI, ale pokrywa się mniej-więcej z książką\\
+Znajdujemy takie punkty, żeby $|x-x_1|=|x-x_2|$, dla tego przypadku $x_1 = -1$ i $x_2 = 3$. Odległość od x $h=2$\\
+$f'(1)=\frac{f(x+h)-f(x-h)}{2h}=\frac{f(3)-f(-1)}{2*2}=\frac{-1-(-1)}{4}=0$\\
+Co jest różne w porównaniu do wartości wyliczonej z wielomianu. Jest to jednak do przewidzenia, ponieważ jeżeli wyświetlimy wykres wielomianu, to nie jest to maksimum lokalne, ale wg funkcji dyskretnej jest.
 
 \section{Newton}
 Dla danej funkcji:
@@ -181,6 +203,91 @@ $n2=(\cancel{\frac{0}{(-1-0)(-1-1)}}+\frac{-1}{(0-(-1))(0-1)}+\cancel{\frac{0}{(
 $n3=(\cancel{\frac{0}{(-1-0)(-1-1)(-1-2)}}+\frac{-1}{(0-(-1))(0-1)(0-2)}+\cancel{\frac{0}{(1-(-1))(1-0)(1-2)}}+\frac{1}{(2-(-1))(2-0)(2-1)})(x-(-1))(x-0)(x-1)$\\
 $P(x)=n0+n1+n2+n3$\\
 $P(x)=\frac{1}{3}(-x^3+3x^2+x-3)$\\
-Ogólnie Newton to suma wielomianów k-tego stopnia, gdzie suma $\frac{f(x_k)}{x_k-x_n}$ pomnożona przez $(x-x_n)$, gdzie $n \in \{1,2...,k\}$.
+Ogólnie Newton to suma wielomianów k-tego stopnia, gdzie nk to suma $\frac{f(x_k)}{x_k-x_n}$ pomnożona przez $(x-x_n)$, gdzie $n \in \{1,2...,k\}$ (zerowy wielomian to $f(x_0)$).
+
+\section{Metody rozwiązywania układów}
+\subsection{Metoda Newtona (Nieliniowe)}
+Wzór: $N(x)=x-\frac{f(x)}{f'(x)}$\\
+Uwaga: chyba można znaleźć punkt $g(x)=0$ z $g(x)=\frac{f(x)}{f'(x)}$, wtedy tam jest albo $f(x)=0$ albo $f(x)=\pm \infty$, przynajmniej tak działa dla poniższych przykładów, ale wtedy to nie jest metoda Newtona chyba.
+\subsubsection{$f(x)=ln(x)-\frac{1}{x}$}
+$\frac{d}{dx}f(x)=f'(x)=\frac{x-1}{x^2}$\\
+$x_0=2$\\
+$x_1=N(x_0)=1.74247042592$\\
+$x_2=N(x_1)=1.76305587394$\\
+$x_3=N(x_2)=1.76322282359$\\
+$x_4=N(x_3)=1.76322283435$\\
+Nie chce mi się dalej robić, ale punkt zerowy jest w około $x=1.7632228$, co daje $f(1.7632228)=-3*10^-8$\\
+
+\subsubsection{$f(x)=e^x+\frac{1}{x}$}
+$\frac{d}{dx}f(x)=f'(x)=e^x-\frac{1}{x^2}$\\
+$x_0=1$
+$x_1=N(x_0)=-1.16395341374$\\
+$x_2=N(x_1)=-2.44811693124$\\
+$x_3=N(x_2)=-6.45348240853$\\
+$x_4=N(x_3)=-13.2898033355$\\
+
+Dalej nie robię, bo $x_n-x_{n-1}$ się zwiększa a nie zmniejsza, czyli funkcja nie przecina punktu 0.
+
+\subsection{$f(x)=e^x-\frac{1}{x}$}
+$\frac{d}{dx}f(x)=f'(x)=e^x+\frac{1}{x^2}$\\
+$x_0=1$
+$x_1=N(x_0)=0.53788284274$\\
+$x_2=N(x_1)=0.566277007666$\\
+$x_3=N(x_2)=0.567142580362$\\
+$x_4=N(x_3)=0.567143290409$\\
+
+Punkt zerowy znajduje się mniej więcej w x=0.56714
+
+\subsection{Jacobiego (liniowe)}
+Wzór: $x_{i+1}=(1-D^{-1}x_i)+D^{-1}b$\\
+Uwaga: Ta metoda działa tylko jeśli w każdym wierszu i kolumnie suma modułów elementów niediagonalnych jest mniejsza niż moduł elementu diagonalnego.
+\subsubsection{\begin{equation*}\begin{cases}
+    4x_1-2x_2=1\\
+    -8x_1+x_2=3
+\end{cases}\end{equation*}}
+Dla tych danych nie możemy zastosować metody Jacobiego, ponieważ $|4|>|-2|$, ale $|1|\cancel{>}|-8|$. Teoretycznie możemy dodać do 2giego równania 2*pierwsze, wtedy warunek będzie spełniony:
+
+\begin{equation*}\begin{cases}
+    4x_1-2x_2=1\\
+    0x_1-3x_2=5
+\end{cases}\end{equation*}
+
+Z czego wynika że:
+\begin{equation*}\begin{cases}
+    x_1=-\frac{7}{12}\\
+    x_2=-\frac{5}{3}
+\end{cases}\end{equation*}
+
+Ale udajemy że jesteśmy komputerami i tego nie wiemy.
+
+Zapisujemy równanie do równania z macierzami:\\
+$Ax=b\:=>\:\begin{bmatrix} 4 & -2 \\ 0 & -3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 1 \\ 5 \end{bmatrix}$
+
+Jako wektor startowy przyjmiemy:\\
+$x_0=\begin{bmatrix} 0 \\ 0 \end{bmatrix}$
+
+Tworzymy macierz $D^{-1}$ (Odwrotności diagonalnych macierzy powyżej):\\
+$D^{-1}=\begin{bmatrix} 4 & 0 \\ 0 & -3 \end{bmatrix}^{-1} = \begin{bmatrix} \frac{1}{4} & 0 \\ 0 & -\frac{1}{3} \end{bmatrix}$
+
+Wyliczymy od razu $D^{-1}b$ oraz $1-D^{-1}A$, ponieważ pozostają niezmienne pomiędzy iteracjami.
+
+$D^{-1}b=\begin{bmatrix} \frac{1}{4} & 0 \\ 0 & -\frac{1}{3} \end{bmatrix}*\begin{bmatrix} 1 \\ 5 \end{bmatrix} = \begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix}$\\
+$1-D^{-1}A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}-\begin{bmatrix} \frac{1}{4} & 0 \\ 0 & -\frac{1}{3} \end{bmatrix}*\begin{bmatrix} 4 & -2 \\ 0 & -3 \end{bmatrix} = \begin{bmatrix} 0 & \frac{1}{2} \\ 0 & 0 \end{bmatrix}$\\
+
+Kuaaro fact: Pamiętajcie kochani, że jak w Wolframie zrobicie $1-A$, to to nie jest $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} - A$ tylko $\begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} - A$ (Cries in a lost hour).
+
+Wzór iteracyjny dla tych równań: $x_{i+1}=\begin{bmatrix} 0 & \frac{3}{2} \\ 1 & 0 \end{bmatrix}*x_i+\begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix}$\\
+$x_1=\begin{bmatrix} 0 & \frac{1}{2} \\ 0 & 0 \end{bmatrix}*\begin{bmatrix} 0 \\ 0 \end{bmatrix}+\begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix} = \begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix}$\\
+$x_2=\begin{bmatrix} 0 & \frac{1}{2} \\ 0 & 0 \end{bmatrix}*\begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix}+\begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix} = \begin{bmatrix} -\frac{7}{12} \\ -\frac{5}{3} \end{bmatrix}$\\
+$x_3=\begin{bmatrix} 0 & \frac{1}{2} \\ 0 & 0 \end{bmatrix}*\begin{bmatrix} -\frac{7}{12} \\ -\frac{5}{3} \end{bmatrix}+\begin{bmatrix} \frac{1}{4} \\ -\frac{5}{3} \end{bmatrix} = \begin{bmatrix} -\frac{7}{12} \\ -\frac{5}{3} \end{bmatrix}$\\
+
+Skoro iteracje się nie zmieniają, mamy rozwiązanie:
+
+\begin{equation*}\begin{cases}
+    x_1=-\frac{7}{12}\\
+    x_2=-\frac{5}{3}
+\end{cases}\end{equation*}
+
+\subsection{Dekompozycja LU (liniowe)}
 
 \end{document}
