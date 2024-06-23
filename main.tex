@@ -8,6 +8,7 @@
 \usepackage{cancel}
 \usepackage{amsmath}
 \usepackage[legalpaper, margin=2cm]{geometry}
+\usepackage{multirow}
 
 \setlength{\parindent}{0pt}
 
@@ -125,18 +126,20 @@ $-\sqrt{\frac{5}{7}}<0$, więc jest poza przedziałem. Należy równierz dodać 
 
 Dla $x=\sqrt{\frac{5}{7}}$ aproksymacja jest obarczona największym błędem.
 
-\subsection{Jednostajna}
-\textbf{UWAGA: Idiota programista nie zrobił, nie używać}
+\subsection{Jednostajna (Taylora)}
+\textbf{UWAGA: Wynik teoretyczny inny niż praktyczne (gorszy), nie przepisywać bezmyślnie}
 W aproksymacji jednostajnej należy stworzyć jak najmniejszy maksymalny błąd.\\
-\subsubsection{Metoda szeregów potęgowych}
-Nie rozumiem do końca, co chciał, bo szereg potęgowy to dosłownie wielomian.\\
-$\sqrt{x}=ax^2+bx+c$\\
-$f(x)=\sqrt{x}-(ax^2+bx+c), x\in<0;1>$\\
-$\frac{d}{dx}=\frac{1}{2\sqrt{x}}-2ax-b$
+Szereg Taylora n-tego stopnia = $\sum_{i=0}^{n}(\frac{\frac{d^i}{dx^i}f(x_0)}{i!}(x-\delta)^i)$, gdzie $x_0$ to środek przedziału, $\delta$ to promień przedziału, czyli długość/2.
+
+\subsubsection{$y=\sqrt{x}, a\in <0;2>$}
+$x_0=1,\:\delta=1$\\
+Dla 2giego stopnia szereg Taylora wygląda $f(x)=\sqrt{1}+\frac{1}{2\sqrt{1}}(x-1)+\frac{-\frac{1}{4x^\frac{3}{2}}}{2!}(x-1)^2=-\frac{x^2}{8}+\frac{3x}{4}+\frac{3}{8}$.\\
+Rozwiązanie teoretycznie poprawne, ale jak na desmosie patrzę na błąd funkcji, to dla mniejszego c błąd maksymalny jest mniejszy. Ekstrema lokalne są w 0 i 2. Najlepsza praktyczna wartość, jaką znalazłem była dla $c=\frac{\sqrt{2}-1}{2}$
 
 \begin{equation*}\begin{cases}
     \frac{1}{2\sqrt{x}}-2ax-b=0
 \end{cases}\end{equation*}
+
 
 
 \section{Lagrange}
@@ -208,7 +211,74 @@ $P(x)=n0+n1+n2+n3$\\
 $P(x)=\frac{1}{3}(-x^3+3x^2+x-3)$\\
 Ogólnie Newton to suma wielomianów k-tego stopnia, gdzie nk to suma $\frac{f(x_k)}{x_k-x_n}$ pomnożona przez $(x-x_n)$, gdzie $n \in \{1,2...,k\}$ (zerowy wielomian to $f(x_0)$).
 
+\section{Normy macierzy}
+$A=\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$\\
+\subsection{$||A||_1$}
+Maksymalna suma wartości bezwzględnych w każdej z kolumn.\\
+$||A||_1=max\{|1|+|4|+|7|=12, |2|+|5|+|8|=15, |3|+|6|+|9|=18\}$\\
+$||A||_1=18$
+
+\subsection{$||A||_2$}
+$\sqrt{max\{\lambda\}}$, gdzie $\lambda$ to wartości dla których $det(\lambda I - A^TA)=0$\\
+$A^TA=\begin{bmatrix} 1 & 4 & 7 \\ 2 & 5 & 8 \\ 3 & 6 & 9 \end{bmatrix}\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}=\begin{bmatrix} 66 & 78 & 90 \\ 78 & 93 & 108 \\ 90 & 108 & 126 \end{bmatrix}$\\
+$det(\begin{bmatrix} \lambda & 0 & 0 \\ 0 & \lambda & 0 \\ 0 & 0 & \lambda \end{bmatrix}-\begin{bmatrix} 66 & 78 & 90 \\ 78 & 93 & 108 \\ 90 & 108 & 126 \end{bmatrix})=0$\\
+$\lambda^3-285\lambda^2+324\lambda=0$\\
+$\lambda \in \{0, \frac{285-3\sqrt{8881}}{2}, \frac{285+3\sqrt{8881}}{2}\}$\\
+$max\{\lambda\}=\frac{285+3\sqrt{8881}}{2}$\\
+$||A||_2=\sqrt{\frac{285+3\sqrt{8881}}{2}}\approx 16.85$
+
+\subsection{$||A||_\infty$}
+Maksymalna suma wartości bezwzględnych w każdym z wierszy.\\
+$||A||_\infty=max\{|1|+|2|+|3|=6, |4|+|5|+|6|=15, |7|+|8|+|9|=24\}$\\
+$||A||_\infty=24$
+
+\subsection{$||A||_F$}
+Pierwiastek sumy kwadratów wszystkich elementów w macierzy.\\
+$||A||_F=\sqrt{1^2+2^2+3^2+4^2+5^2+6^2+7^2+8^2+9^2}$\\
+$||A||_F=16.88$
+
+$\sqrt[7]{a}\\x_{i+1}=\frac{6x_i+\frac{a}{x^6_i}}{7}$
+
 \section{Metody rozwiązywania układów}
+\subsection{Prosta (Nieliniowe)}
+
+Wzór: $0=f(x) => x_{n+1}=\phi (x_n), 0 < |\phi '(x_n)| < 1$.
+
+\subsubsection{$f(x)=ln(x)-\frac{1}{x}$}
+
+$ln(x)=\frac{1}{x}$\\
+$e^{ln(x)}=e^{\frac{1}{x}}$\\
+$x=e^\frac{1}{x}$\\
+$x_0=2$\\
+$x_1=e^\frac{1}{x_0}=1.6487212707$\\
+$x_2=e^\frac{1}{x_1}=1.8340573792$\\
+$x_3=e^\frac{1}{x_2}=1.72502097856$\\
+$x_4=e^\frac{1}{x_3}=1.78550822551$\\
+$x_5=e^\frac{1}{x_4}=1.75078564631$\\
+$x_6=e^\frac{1}{x_5}=1.77034093906$\\
+$x_7=e^\frac{1}{x_6}=1.75920666162$\\
+$x_8=e^\frac{1}{x_7}=1.76550725831$\\
+$x_9=e^\frac{1}{x_8}=1.76192938968$\\
+$x_{10}=e^\frac{1}{x_9}=1.76395709418$\\
+
+\subsubsection{$f(x)=e^x-\frac{1}{x}$}
+$\frac{1}{x}=e^x$\\
+$x=\frac{1}{e^x}$\\
+$x_0=0$\\
+$x_1=\frac{1}{e^{x_0}}=1$\\
+$x_2=\frac{1}{e^{x_1}}=0.367879441171$\\
+$x_3=\frac{1}{e^{x_2}}=0.692200627556$\\
+$x_4=\frac{1}{e^{x_3}}=0.500473500563$\\
+$x_5=\frac{1}{e^{x_4}}=0.606243535086$\\
+$x_6=\frac{1}{e^{x_5}}=0.545395785975$\\
+$x_7=\frac{1}{e^{x_6}}=0.579612335503$\\
+$x_8=\frac{1}{e^{x_7}}=0.560115461361$\\
+$x_9=\frac{1}{e^{x_8}}=0.57114311508$\\
+$x_{10}=\frac{1}{e^{x_9}}=0.564879347391$\\
+$x_{11}=\frac{1}{e^{x_{10}}}=0.568428725029$\\
+$x_{12}=\frac{1}{e^{x_{11}}}=0.566414733147$\\
+$x_{13}=\frac{1}{e^{x_{12}}}=0.567556637328$\\
+
 \subsection{Metoda Newtona (Nieliniowe)}
 Wzór: $N(x)=x-\frac{f(x)}{f'(x)}$\\
 Uwaga: chyba można znaleźć punkt $g(x)=0$ z $g(x)=\frac{f(x)}{f'(x)}$, wtedy tam jest albo $f(x)=0$ albo $f(x)=\pm \infty$, przynajmniej tak działa dla poniższych przykładów, ale wtedy to nie jest metoda Newtona chyba.
@@ -223,7 +293,7 @@ Nie chce mi się dalej robić, ale punkt zerowy jest w około $x=1.7632228$, co 
 
 \subsubsection{$f(x)=e^x+\frac{1}{x}$}
 $\frac{d}{dx}f(x)=f'(x)=e^x-\frac{1}{x^2}$\\
-$x_0=1$
+$x_0=1$\\
 $x_1=N(x_0)=-1.16395341374$\\
 $x_2=N(x_1)=-2.44811693124$\\
 $x_3=N(x_2)=-6.45348240853$\\
@@ -233,7 +303,7 @@ Dalej nie robię, bo $x_n-x_{n-1}$ się zwiększa a nie zmniejsza, czyli funkcja
 
 \subsubsection{$f(x)=e^x-\frac{1}{x}$}
 $\frac{d}{dx}f(x)=f'(x)=e^x+\frac{1}{x^2}$\\
-$x_0=1$
+$x_0=1$\\
 $x_1=N(x_0)=0.53788284274$\\
 $x_2=N(x_1)=0.566277007666$\\
 $x_3=N(x_2)=0.567142580362$\\
@@ -478,7 +548,8 @@ $x^2 = Bx^1 + C =
 
 \section{SOR (Metoda Sukcesywnej Relaksacji)(Liniowe)}
 \textbf{WORK IN PROGRESS}\\
-DLC dla metody Gaussa-Seidla, gdzie $B(\omega)=\frac{1}{\omega}D(I-\omega D^{-1}E)$, $\omega$ powinno być $0<\omega<2$
+DLC dla metody Gaussa-Seidla, gdzie $B(\omega)=\frac{1}{\omega}D(I-\omega D^{-1}E)$, $\omega$ powinno być $0<\omega<2$.\\
+Ogólny wzór dla  $B(\omega)$, gdzie $E=\begin{bmatrix} 0 & 0 & 0 \\ e_1 & 0 & 0 \\ e_2 & e_3 & 0 \end{bmatrix}$, $D=\begin{bmatrix} d_1 & 0 & 0 \\ 0 & d_2 & 0 \\ 0 & 0 & d_3 \end{bmatrix}$, $B(\omega) = \begin{bmatrix} \frac{d_1}{\omega} & 0 & 0 \\ -e_1 & \frac{d_2}{\omega} & 0 \\ -e_2 & -e_3 & \frac{d_3}{\omega} \end{bmatrix}$
 
 \subsection{
 \begin{equation*}\begin{cases}
@@ -494,7 +565,7 @@ $E=\begin{bmatrix} 0 & 0 & 0 \\ -1 & 0 & 0 \\ 1 & -1 & 0 \end{bmatrix}$
 
 \subsubsection{$\omega=1.5$}
 $B(1.5)=\frac{1}{1.5}D(I-1.5D^{-1}E)$\\
-$B(1.5)=\frac{1}{1.5}\begin{bmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}(\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}-1.5\begin{bmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 & 0 & 0 \\ -1 & 0 & 0 \\ 1 & -1 & 0 \end{bmatrix})=\begin{bmatrix} \frac{2}{3} & 0 & 0 \\ 0 & -\frac{2}{3} & 1 \\ -1 & 1 & \frac{2}{3} \end{bmatrix}$
+$B(1.5)=\frac{1}{1.5}\begin{bmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}(\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}-1.5\begin{bmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 & 0 & 0 \\ -1 & 0 & 0 \\ 1 & -1 & 0 \end{bmatrix})=\begin{bmatrix} \frac{2}{3} & 0 & 0 \\ 1 & -\frac{2}{3} & 0 \\ -1 & 1 & \frac{2}{3} \end{bmatrix}$
 
 
 \subsubsection{$\omega=1.2$}
@@ -502,6 +573,111 @@ $B(1.2)=\frac{1}{1.2}D(I-1.2D^{-1}E)$\\
 $B(1.2)=\frac{1}{1.2}\begin{bmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}(\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}-1.2\begin{bmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 & 0 & 0 \\ -1 & 0 & 0 \\ 1 & -1 & 0 \end{bmatrix})=\begin{bmatrix} \frac{5}{6} & 0 & 0 \\ 1 & -\frac{5}{6} & 0 \\ -1 & 1 & \frac{5}{6} \end{bmatrix}$
 
 Reszta jak w Gaussie
+
+%\section{Tabelki}
+%\begin{table}[H]
+%\centering
+%\begin{tabular}{|l|l|l|}
+%    \hline
+%    Funkcja & Pochodna & Całka \\
+%    \hline $( f(x) = \sin(x) )$ & $( f'(x) = \cos(x) )$ & $( F(x) = -\cos(x) )$ \\
+%    \hline $( g(x) = \cos(x) )$ & $( g'(x) = -\sin(x) )$ & $( G(x) = \sin(x) )$ \\
+%    \hline $( h(x) = \tan(x) )$ & $( h'(x) = \sec^2(x) )$ & $( H(x) = -\ln|\cos(x)| )$ \\
+%    \hline $( j(x) = \arcsin(x) )$ & $( j'(x) = \frac{1}{\sqrt{1-x^2}} )$ & $( J(x) = x\arcsin(x) + \sqrt{1-x^2} )$ \\
+%    \hline $( k(x) = \arccos(x) )$ & $( k'(x) = -\frac{1}{\sqrt{1-x^2}} )$ & $( K(x) = x\arccos(x) - \sqrt{1-x^2} )$ \\
+%    \hline $( l(x) = \arctan(x) )$ & $( l'(x) = \frac{1}{1+x^2} )$ & $( L(x) = \frac{1}{2}\ln(1+x^2) )$ \\
+%    \hline $( m(x) = \sinh(x) )$ & $( m'(x) = \cosh(x) )$ & $( M(x) = \sinh(x) )$ \\
+%    \hline $( n(x) = \cosh(x) )$ & $( n'(x) = \sinh(x) )$ & $( N(x) = \cosh(x) )$ \\
+%    \hline $( p(x) = \tanh(x) )$ & $( p'(x) = \operatorname{sech}^2(x) )$ & $( P(x) = \ln(\cosh(x)) )$ \\
+%    \hline
+%\end{tabular}
+%\end{table}
+
+\section{Całki}
+\subsection{Gauss/Gauss-Legendre}
+\subsubsection{Tabelka z wartościami}
+\begin{table}[H]
+\resizebox{0.5\textwidth}{!}{%
+\begin{tabular}{|c|c|c|}
+\hline
+n                  & $w_i$                   & $x_i$                         \\ \hline
+1                  & $w_1=2$                 & $x_1=0$                       \\ \hline
+2                  & $w_1=w_2=1$             & $x_2=-x_1=\sqrt{\frac{1}{3}}$ \\ \hline
+\multirow{2}{*}{3} & $w_1=w_3=\frac{5}{9}$   & $x_3=-x_1=\sqrt{\frac{3}{5}}$ \\ \cline{2-3} 
+                   & $w_2=\frac{8}{9}$       & $x_2=0$                       \\ \hline
+\multirow{2}{*}{4} & $w_1=w_4\approx 0.3479$ & $x_4=-x_1\approx 0.8611$      \\ \cline{2-3} 
+                   & $w_2=w_3\approx 0.6521$ & $x_3=-x_2\approx 0.3400$      \\ \hline
+\multirow{3}{*}{5} & $w_1=w_5\approx 0.2369$ & $x_5=-x_1\approx 0.9062$      \\ \cline{2-3} 
+                   & $w_2=w_4\approx 0.4786$ & $x_4=-x_2\approx 0.5385$      \\ \cline{2-3} 
+                   & $w_3=\frac{128}{225}$   & $x_3=0$                       \\ \hline
+\end{tabular}}
+\end{table}
+\subsubsection{$\int_{0}^{\pi}sin(x)dx$}
+\textbf{1. Zmiana przedziału na [-1, 1]}\\
+$s=\int_{0}^{\pi}sin(x)dx=\frac{\pi-0}{2}\int_{-1}^{1}f(\frac{\pi-0}{2}u+\frac{\pi+0}{2})du$\\
+\textbf{2. Użycie dwu-punktowego całkowania}\\
+$s=\sum_{i=1}^{2}w_if(x_i)=\frac{\pi}{2}(1*sin[\frac{\pi}{2}(-\sqrt{\frac{1}{3}})+\frac{\pi}{2}]+1*sin[\frac{\pi}{2}\sqrt{\frac{1}{3}}+\frac{\pi}{2}])\approx\frac{\pi}{2}(0.6162+0.6162)\approx1.9358$\\
+\textbf{3. Użycie trzy-punktowego całkowania}\\
+$s=\sum_{i=1}^{3}w_if(x_i)=\frac{\pi}{2}(\frac{5}{9}sin[\frac{\pi}{2}(-\sqrt{\frac{3}{5}})+\frac{\pi}{2}]+\frac{8}{9}sin[\frac{\pi}{2}*0+\frac{\pi}{2}]+\frac{5}{9}sin[\frac{\pi}{2}\sqrt{\frac{3}{5}}+\frac{\pi}{2}])\approx\frac{\pi}{2}(\frac{5}{9}*0.3467+\frac{8}{9}*1+\frac{5}{9}*0.3467)\approx2.0014$\\
+\textbf{4. Błędy}\\
+Wartość dokładna: $\int_{0}^{\pi}sin(x)dx=-cos(x)|^\pi_0=-cos(\pi)+cos(0)=-(-1)+1=2$\\
+Błąd dla dwu-punktowego całkowania - $|\epsilon_t| = |\frac{2-1.9358}{2}|*100\% = 3.21\%$\\
+Błąd dla trzy-punktowego całkowania - $|\epsilon_t| = |\frac{2-2.0014}{2}|*100\% = 0.07\%$
+
+\subsubsection{$\int_{0}^{3}x^2dx$}
+\textbf{1. Zmiana przedziału na [-1, 1]}\\
+$s=\int_{0}^{3}x^2dx=\frac{3-0}{2}\int_{-1}^{1}f(\frac{3-0}{2}u+\frac{3+0}{2})du$\\
+\textbf{2. Użycie dwu-punktowego całkowania}\\
+$s=\sum_{i=1}^{2}w_if(x_i)=\frac{3-0}{2}(1*[\frac{3-0}{2}(-\sqrt{\frac{1}{3}})+\frac{3+0}{2}]^2+1*[\frac{3-0}{2}(\sqrt{\frac{1}{3}})+\frac{3+0}{2}]^2)=\frac{3}{2}(3+\cancel{\frac{9}{2}\sqrt{\frac{1}{3}}}+3\cancel{-\frac{9}{2}\sqrt{\frac{1}{3}}})=9$\\
+\textbf{3. Błędy}\\
+Wartość dokładna: $\int_{0}^{3}x^2dx=\frac{x^3}{3}|^3_0=\frac{27}{3}-\frac{0}{3}=9$\\
+Błąd - $|\epsilon_t| = |\frac{9-9}{9}|*100\% = 0\%$\\
+Jako że aproksymujemy wielomian drugiego stopnia ($x^2$) za pomocą wielomianu drugiego stopnia (Legendre'a), to błąd jest równy 0\%, ponieważ za pomocą wielomianu Legendre'a można idealnie pokryć $x^2$.\\
+
+\subsection{Simpson/Parabol}
+\subsubsection{Dla parzystej liczby przedziałów}
+Dla 2n przedziałów bierzemy 2n+1 punktów tak, żeby pierwszy i ostatni były na początku i końcu przedziału, a pozostałe były równo od siebie oddalone. Następnie, wyliczamy wartości funkcji w punktach. Wartości funkcji mnożymy przez 2 jeżeli są nieparzyste, z wyjątkiem początku i końca przedziału, które mnożymy przez 1, oraz przez 4 jeżeli są nieparzyste. Na koniec mnożymy sumę wyników funkcji przez przedział oraz dzielimy przez sumę "mnożników", przez które pomnożyliśmy wyniki funkcji.\\
+Błąd: $E\approx-\frac{N}{180}(\frac{b-a}{N})^5*avg\{\frac{d^4}{dx^4}f(x)\}$, gdzie $N$ to liczba przedziałów.\\
+\textbf{Dla funkcji $\int_{0}^{\pi}sin(x)dx$}\\
+Wartość idealna: $-cos(x)|^\pi_0=-cos(\pi)-(-cos(0))=2$\\
+\textbf{Dla 2 przedziałów}\\
+Punkty: $p \in \{0, \frac{\pi}{2}, \pi\}$\\
+Wartości funkcji: $f(p) \in \{sin(0)=0, sin(\frac{\pi}{2})=1, sin(\pi)=0\}$\\
+Mnożenie wartości funkcji: $m*f(p) \in \{1*0, 4*1, 1*0\}$\\
+Wartość do pomnożenia sumy funkcji: $\frac{\pi-0}{1+4+1}=\frac{\pi}{6}$\\
+Wartość całki: $\frac{\pi}{6}4=\frac{2\pi}{3}=2.0944$\\
+\textbf{Dla 4 przedziałów}\\
+Punkty: $p \in \{0, \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \pi\}$\\
+Wartości funkcji: $f(p) \in \{sin(0)=0, sin(\frac{\pi}{4})=\frac{\sqrt{2}}{2}, sin(\frac{\pi}{2})=1, sin(\frac{3\pi}{4})=\frac{\sqrt{2}}{2}, sin(\pi)=0\}$\\
+Mnożenie wartości funkcji: $m*f(p) \in \{1*0, 4*\frac{\sqrt{2}}{2}, 2*1, 4*\frac{\sqrt{2}}{2}, 1*0\}$\\
+Wartość do pomnożenia sumy funkcji: $\frac{\pi-0}{1+4+2+4+1}=\frac{\pi}{12}$\\
+Wartość całki: $\frac{\pi}{12}(2*\sqrt{2}+2+2*\sqrt{2})=\frac{\pi}{6}(2\sqrt{2}+1)=2.0046$\\
+Błąd względny: $E\approx-\frac{4}{180}(\frac{\pi-0}{4})^5*\frac{\int_{0}^{\pi}(sin(x))dx}{\pi-0} = -\frac{\pi^4}{23040} \approx -0.0042$\\
+Błąd bezwzględny: $\frac{E}{\int_{0}^{\pi}sin(x)dx}*100\%=\frac{E}{2}*100\% \approx 0.2114\%$\\
+\textbf{Dla 6 przedziałów}\\
+Punkty: $p \in \{0, \frac{\pi}{6}, \frac{\pi}{3}, \frac{\pi}{2}, \frac{2\pi}{3}, \frac{5\pi}{6}, \pi\}$\\
+Wartości funkcji: $f(p) \in \{sin(0)=0, sin(\frac{\pi}{6})=\frac{1}{2}, sin(\frac{\pi}{3})=\frac{\sqrt{3}}{2}, sin(\frac{\pi}{2})=1, sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}, \\sin(\frac{5\pi}{6})=\frac{1}{2}, sin(\pi)=0\}$\\
+Mnożenie wartości funkcji: $m*f(p) \in \{1*0, 4*\frac{1}{2}, 2*\frac{\sqrt{3}}{2}, 4*1, 2*\frac{\sqrt{3}}{2}, 4*\frac{1}{2}, 1*0\}$\\
+Wartość do pomnożenia sumy funkcji: $\frac{\pi-0}{1+4+2+4+2+4+1}=\frac{\pi}{18}$\\
+Wartość całki: $\frac{\pi}{18}(2+\sqrt{3}+4+\sqrt{3}+2)=\frac{\pi}{9}(4+\sqrt{3})=2.0009$\\
+\subsubsection{Dla nieparzystej liczby przedziałów}
+\textbf{Dla funkcji $\int_{0}^{\pi}sin(x)dx$}\\
+Wartość idealna: $-cos(x)|^\pi_0=-cos(\pi)-(-cos(0))=2$\\
+\textbf{Dla 3 przedziałów}\\
+Postępujemy tak samo, jak dla powyższych przykładów, ale używamy wag 1, 3, 3 i 1.\\
+Punkty: $p \in \{0, \frac{\pi}{3}, \frac{2\pi}{3}, \pi\}$\\
+Wartości funkcji: $f(p) \in \{sin(0)=0, sin(\frac{\pi}{3})=\frac{\sqrt{3}}{2}, sin(\frac{\pi}{3})=\frac{\sqrt{3}}{2}, sin(\pi)=0\}$\\
+Mnożenie wartości funkcji: $m*f(p) \in \{1*0, 3*\frac{\sqrt{3}}{2}, 3*\frac{\sqrt{3}}{2}, 1*0\}$\\
+Wartość do pomnożenia sumy funkcji: $\frac{\pi}{1+3+3+1}=\frac{\pi}{8}$\\
+Wartość całki: $\frac{\pi}{8}(3\sqrt{3})=\frac{3\pi \sqrt{3}}{8}=2.0405$\\
+\textbf{Dla 5 i więcej przedziałów}\\
+Dzielimy przedziały na 3 i 2/resztę. Używamy algorytmu dla 3 przedziałów dla początku i 2/reszty dla końca.
+Punkty: $p \in \{0, \frac{\pi}{5}, \frac{2\pi}{5}, \frac{3\pi}{5}, \frac{4\pi}{5}, \pi\}$\\
+Wartości funkcji: $f(p) \in \{sin(0)=0, sin(\frac{\pi}{5})\approx 0.5878, sin(\frac{2\pi}{5})\approx 0.9511, sin(\frac{3\pi}{5})\approx 0.9511,\\ sin(\frac{4\pi}{5})\approx 0.5878, sin(\pi)=0\}$\\
+Wartości do pomnożenia sumy funkcji:\\
+Dla 3: $\frac{\frac{3\pi}{5}-0}{1+3+3+1}=\frac{3\pi}{40}$\\
+Dla 2: $\frac{\pi-\frac{3\pi}{5}}{1+4+1}=\frac{\pi}{15}$\\
+Rozbicie na 3 i 2 przedziały: $\frac{3\pi}{40}(1*0+3*0.5878+3*0.9511+1*0.9511) + \frac{\pi}{15}(1*0.9511+4*0.5878+1*0)=2.0034$
 
 \end{document}
 
